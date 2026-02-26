@@ -1,0 +1,155 @@
+/* ── Tailwind base directives ─────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS custom properties ───────────────────────────────── */
+:root {
+  --bg-main:      #faf9f7;
+  --bg-tint:      rgba(237, 232, 248, 0.18);
+  --color-accent: #8c72c8;
+  --color-text:   #2e2c2a;
+  --color-muted:  #7d7268;
+  --font-serif:   'Lora', Georgia, serif;
+  --font-sans:    'DM Sans', sans-serif;
+}
+
+/* ── Base resets & typography ────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar          { width: 5px; }
+::-webkit-scrollbar-track    { background: var(--bg-main); }
+::-webkit-scrollbar-thumb    { background: #d9d0f2; border-radius: 99px; }
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection {
+  background: #d9d0f2;
+  color: #3d3630;
+}
+
+/* ── Utility layer additions ─────────────────────────────── */
+@layer utilities {
+  /* Animation delay helpers */
+  .delay-100  { animation-delay: 0.10s; }
+  .delay-200  { animation-delay: 0.20s; }
+  .delay-300  { animation-delay: 0.30s; }
+  .delay-400  { animation-delay: 0.40s; }
+  .delay-500  { animation-delay: 0.50s; }
+  .delay-600  { animation-delay: 0.60s; }
+
+  /* Fill-mode so elements stay visible after animating */
+  .fill-both  { animation-fill-mode: both; }
+
+  /* Hero mesh gradient */
+  .hero-mesh {
+    background:
+      radial-gradient(ellipse at 10% 25%, #f9e4e4cc 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 15%, #ede8f8cc 0%, transparent 50%),
+      radial-gradient(ellipse at 65% 85%, #e3eef9aa 0%, transparent 55%),
+      radial-gradient(ellipse at 25% 90%, #fdeedebb 0%, transparent 50%),
+      #faf9f7;
+  }
+
+  /* Section tint */
+  .section-tint {
+    background-color: rgba(237, 232, 248, 0.15);
+  }
+
+  /* Nav underline effect */
+  .nav-underline {
+    position: relative;
+  }
+  .nav-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: #a48fd8;
+    transition: width 0.25s ease;
+  }
+  .nav-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Card hover lift */
+  .card-lift {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.09);
+  }
+
+  /* Soft button hover */
+  .btn-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  .btn-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Scroll-reveal base state */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered reveal delays */
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+  .reveal-delay-4 { transition-delay: 0.32s; }
+
+  /* Input focus ring */
+  .input-ring:focus {
+    outline: none;
+    border-color: #c0b0e8;
+    box-shadow: 0 0 0 3px rgba(192, 176, 232, 0.25);
+  }
+}
+
+/* ── Component layer additions ───────────────────────────── */
+@layer components {
+  .badge {
+    @apply text-stone-600 text-sm font-medium px-4 py-1.5 rounded-full;
+  }
+
+  .section-label {
+    @apply text-xs uppercase tracking-widest text-stone-400 mb-3 block;
+  }
+
+  .section-heading {
+    @apply font-serif text-3xl sm:text-4xl font-medium text-stone-800 leading-snug;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl p-7 shadow-soft border border-stone-100 card-lift;
+  }
+}
